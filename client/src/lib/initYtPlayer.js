@@ -1,13 +1,14 @@
 /* global YT */
 /* eslint no-undef: "error" */
 
-const initYtPlayer = new Promise((res, rej) => {
+const initYtPlayer = new Promise(res => {
   // load yt iframe api
   const script = document.createElement('script')
   const firstScriptTag = document.getElementsByTagName('script')[0]
   script.src = 'https://www.youtube.com/iframe_api'
   firstScriptTag.parentNode.insertBefore(script, firstScriptTag)
 
+  // TODO: handle unable to load youtube api
   // create player when yt api has loaded
   window.onYouTubeIframeAPIReady = () => {
     res(
