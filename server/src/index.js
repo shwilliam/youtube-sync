@@ -7,11 +7,16 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', socket => {
+  socket.broadcast.emit('connection')
+
   socket.on('state_change', state => {
     socket.broadcast.emit('state_change', state)
   })
   socket.on('time_change', time => {
     socket.broadcast.emit('time_change', time)
+  })
+  socket.on('request_time_change', () => {
+    socket.broadcast.emit('request_time_change')
   })
 })
 

@@ -21,8 +21,33 @@ function App() {
       }
     })
 
+    socket.on('connection', () => {
+      let time
+      try {
+        time = player.getCurrentTime()
+        socket.emit('time_change', time)
+      } catch (e) {
+        console.error(e)
+      }
+    })
+
     socket.on('time_change', time => {
-      player.seekTo(Number(time))
+      try {
+        player.seekTo(Number(time))
+      } catch (e) {
+        console.error(e)
+        alert('Unable to sync time')
+      }
+    })
+
+    socket.on('request_time_change', () => {
+      let time
+      try {
+        time = player.getCurrentTime()
+        socket.emit('time_change', time)
+      } catch (e) {
+        console.error(e)
+      }
     })
   }, [player])
 
@@ -42,8 +67,18 @@ function App() {
     player.stopVideo()
   }
 
-  const onSyncTime = () => {
+  const onSync = () => {
     socket.emit('time_change', player.getCurrentTime())
+  }
+
+  const onSyncRequest = () => {
+    socket.emit('request_time_change')
+  }
+
+  const onChangeTime = d => {
+    const newTime = player.getCurrentTime() + d
+    socket.emit('time_change', newTime)
+    player.seekTo(newTime)
   }
 
   return (
@@ -61,12 +96,21 @@ function App() {
           <button onClick={onStop} type="button">
             stop
           </button>
-          <button onClick={onSyncTime} type="button">
+          <button onClick={onSync} type="button">
+            sync others
+          </button>
+          <button onClick={onSyncRequest} type="button">
             sync
+          </button>
+          <button onClick={() => onChangeTime(-5)} type="button">
+            -5
+          </button>
+          <button onClick={() => onChangeTime(5)} type="button">
+            +5
           </button>
         </div>
       ) : (
-        'loading'
+        'loading...'
       )}
     </div>
   )

@@ -15,7 +15,7 @@ const initYtPlayer = new Promise(res => {
       new YT.Player('player', {
         height: '390',
         width: '640',
-        videoId: 'l0vrsO3_HpU',
+        videoId: 'nN5WEoCAyGM',
         playerVars: {
           controls: 0,
           autohide: 1,
