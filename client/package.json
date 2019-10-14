@@ -1,0 +1,24 @@
+{
+  "name": "youtube-sync-client",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shwilliam/youtube-sync.git"
+  },
+  "author": "William L <w-lindvall@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shwilliam/youtube-sync/issues"
+  },
+  "homepage": "https://github.com/shwilliam/youtube-sync#readme",
+  "devDependencies": {
+    "eslint": "^6.5.1",
+    "parcel-bundler": "^1.12.4"
+  }
+}
