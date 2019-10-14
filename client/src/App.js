@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import useYtPlayer from './hooks/useYtPlayer'
 import socket from './lib/socket'
 
 function App() {
+  const [newVideoInput, setNewVideoInput] = useState('')
   const [player] = useYtPlayer()
 
   useEffect(() => {
@@ -49,6 +50,14 @@ function App() {
         console.error(e)
       }
     })
+
+    socket.on('update_video', id => {
+      try {
+        player.loadVideoById(id)
+      } catch (e) {
+        console.error(e)
+      }
+    })
   }, [player])
 
   // TODO: fix unable to sync until video play
@@ -81,9 +90,24 @@ function App() {
     player.seekTo(newTime)
   }
 
+  const onVideoSubmit = e => {
+    e.preventDefault()
+    socket.emit('update_video', newVideoInput)
+    player.loadVideoById(newVideoInput)
+  }
+
   return (
     <div className="App">
-      <div id="player" style={{'pointer-events': 'none'}} />
+      <form onSubmit={onVideoSubmit}>
+        <input
+          onChange={e => setNewVideoInput(e.target.value)}
+          placeholder="YouTube ID"
+          type="text"
+          required
+        />
+        <button type="submit">submit</button>
+      </form>
+      <div id="player" style={{pointerEvents: 'none'}} />
 
       {player ? (
         <div>

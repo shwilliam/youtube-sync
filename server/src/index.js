@@ -18,6 +18,9 @@ io.on('connection', socket => {
   socket.on('request_time_change', () => {
     socket.broadcast.emit('request_time_change')
   })
+  socket.on('update_video', id => {
+    socket.broadcast.emit('update_video', id)
+  })
 })
 
 http.listen(3000, () => {
