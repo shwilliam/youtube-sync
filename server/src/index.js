@@ -10,6 +10,9 @@ io.on('connection', socket => {
   socket.on('state_change', state => {
     socket.broadcast.emit('state_change', state)
   })
+  socket.on('time_change', time => {
+    socket.broadcast.emit('time_change', time)
+  })
 })
 
 http.listen(3000, () => {

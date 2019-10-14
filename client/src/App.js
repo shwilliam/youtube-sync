@@ -20,6 +20,10 @@ function App() {
           break
       }
     })
+
+    socket.on('time_change', time => {
+      player.seekTo(Number(time))
+    })
   }, [player])
 
   // TODO: fix unable to sync until video play
@@ -38,9 +42,13 @@ function App() {
     player.stopVideo()
   }
 
+  const onSyncTime = () => {
+    socket.emit('time_change', player.getCurrentTime())
+  }
+
   return (
     <div className="App">
-      <div id="player" />
+      <div id="player" style={{'pointer-events': 'none'}} />
 
       {player ? (
         <div>
@@ -52,6 +60,9 @@ function App() {
           </button>
           <button onClick={onStop} type="button">
             stop
+          </button>
+          <button onClick={onSyncTime} type="button">
+            sync
           </button>
         </div>
       ) : (
