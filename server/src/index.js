@@ -15,8 +15,14 @@ io.on('connection', socket => {
   socket.on('time_change', time => {
     socket.broadcast.emit('time_change', time)
   })
-  socket.on('request_time_change', () => {
-    socket.broadcast.emit('request_time_change')
+  socket.on('request_time_update', () => {
+    socket.broadcast.emit('request_time_update')
+  })
+  socket.on('request_video_id', () => {
+    socket.broadcast.emit('request_video_id')
+  })
+  socket.on('update_video_id', id => {
+    socket.broadcast.emit('update_video_id', id)
   })
   socket.on('update_video', id => {
     socket.broadcast.emit('update_video', id)

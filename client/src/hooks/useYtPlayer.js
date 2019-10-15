@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
-import initYtPlayer from '../lib/initYtPlayer'
+import {init as initYtPlayer} from '../lib/yt-player'
 
 const useYtPlayer = () => {
   const [player, setPlayer] = useState()
 
   useEffect(() => {
-    initYtPlayer.then(setPlayer)
+    initYtPlayer('l0vrsO3_HpU').then(setPlayer)
   }, [])
 
   return [player]
