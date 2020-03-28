@@ -5,7 +5,7 @@ import NewVideoInput from './NewVideoInput'
 
 const VideoPlayer = () => {
   const [currentVideoId, setCurrentVideoId] = useState()
-  const [player] = useYtPlayer()
+  const [player] = useYtPlayer('l0vrsO3_HpU')
 
   useEffect(() => {
     if (!player) return
@@ -55,8 +55,7 @@ const VideoPlayer = () => {
     })
 
     socket.on('request_video_id', () => {
-      if (currentVideoId)
-        socket.emit('update_video_id', currentVideoId)
+      if (currentVideoId) socket.emit('update_video_id', currentVideoId)
     })
 
     socket.on('update_video_id', id => {

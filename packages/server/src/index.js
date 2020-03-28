@@ -1,9 +1,15 @@
-const app = require('express')()
+const express = require('express')
+const app = express()
+const path = require('path')
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>')
+const PORT = process.env.PORT || '3000'
+
+app.use(express.static(path.join(__dirname, '../build')))
+
+app.get('/*', (_, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'))
 })
 
 io.on('connection', socket => {
@@ -29,6 +35,6 @@ io.on('connection', socket => {
   })
 })
 
-http.listen(3000, () => {
-  console.log('listening on *:3000')
+http.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`)
 })

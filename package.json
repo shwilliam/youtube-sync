@@ -1,0 +1,9 @@
+{
+  "name": "youtube-sync",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "build": "rm -r ./packages/server/build || yarn workspace www build && mv ./packages/www/build ./packages/server/",
+    "start": "yarn workspace server start"
+  }
+}
