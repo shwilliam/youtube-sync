@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {init as initYtPlayer} from '../lib/yt-player'
 
-const useYtPlayer = initialVideoId => {
+export const useYtPlayer = initialVideoId => {
   const [player, setPlayer] = useState()
 
   useEffect(() => {
@@ -10,5 +10,3 @@ const useYtPlayer = initialVideoId => {
 
   return [player]
 }
-
-export default useYtPlayer

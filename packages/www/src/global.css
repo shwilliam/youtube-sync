@@ -1,0 +1,96 @@
+:root {
+  --color__bg: #222;
+  --color__ui: #fff;
+}
+
+html,
+body {
+  margin: 0;
+  font-size: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color__bg);
+}
+
+p {
+  margin: 0;
+}
+
+input,
+button {
+  font: inherit;
+  color: var(--color__ui);
+  background: transparent;
+  border: none;
+  opacity: 0.7;
+  transition: opacity 0.4s ease-in-out;
+}
+
+input:hover,
+button:hover {
+  opacity: 1;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+svg {
+  filter: invert(1);
+}
+
+.player-controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.player-controls__label {
+  position: absolute;
+  top: 1.25rem;
+  text-transform: uppercase;
+  padding-top: 0.5rem;
+  transform: translateY(-0.5rem);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, transform 0.4s ease-in-out;
+  white-space: nowrap;
+}
+
+.player-controls__button {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  /* width: 20px; */
+  /* height: 20px; */
+  opacity: 0.7;
+  transition: opacity 0.3s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.player-controls__button:hover {
+  opacity: 1;
+}
+
+.player-controls__button:hover .player-controls__label,
+.player-controls__button:focus .player-controls__label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.player-controls__button:active {
+  transform: scale(0.95);
+}
+
+.new-video-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.new-video-form__input {
+  min-width: 200px;
+}

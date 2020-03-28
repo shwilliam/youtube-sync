@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function NewVideoInput({onSubmit}) {
+export const NewVideoInput = ({onSubmit}) => {
   const [newVideoInput, setNewVideoInput] = useState('')
 
   const onVideoSubmit = e => {
@@ -9,16 +9,15 @@ function NewVideoInput({onSubmit}) {
   }
 
   return (
-    <form onSubmit={onVideoSubmit}>
+    <form onSubmit={onVideoSubmit} className="new-video-form">
       <input
+        className="new-video-form__input"
         onChange={e => setNewVideoInput(e.target.value)}
-        placeholder="YouTube ID"
+        placeholder="Enter a new YouTube ID..."
         type="text"
         required
       />
-      <button type="submit">submit</button>
+      <button type="submit">Change</button>
     </form>
   )
 }
-
-export default NewVideoInput
