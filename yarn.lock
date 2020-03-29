@@ -2554,6 +2554,11 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
+cheese-toast@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/cheese-toast/-/cheese-toast-0.1.1.tgz#5a245342875844ff18b88585ce3c57434dd3203c"
+  integrity sha512-3nkYdd1pPD/1Kbw+TrBE21hJEq81FY3DR7vExR//ckzLoTxIApeZ7ONpbNwIzTLQ4SIYo1wgCxF/lGuMQ10cDQ==
+
 chokidar@^2.0.0, chokidar@^2.0.4, chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"

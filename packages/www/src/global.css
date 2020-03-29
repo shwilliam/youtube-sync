@@ -44,6 +44,15 @@ svg {
   filter: invert(1);
 }
 
+.toast {
+  left: unset !important;
+  width: 200px;
+  padding: 5px;
+  display: inline-block;
+  color: var(--color__ui);
+  background-color: var(--color__bg);
+}
+
 .player-controls {
   display: flex;
   justify-content: space-between;

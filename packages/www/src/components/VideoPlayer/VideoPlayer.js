@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import CheeseToast from 'cheese-toast'
 import {socket} from '../../lib'
 import {useYtPlayer} from '../../hooks'
 import {NewVideoInput} from './NewVideoInput'
@@ -6,11 +7,10 @@ import {NewVideoInput} from './NewVideoInput'
 export const VideoPlayer = () => {
   const [currentVideoId, setCurrentVideoId] = useState()
   const [player] = useYtPlayer('l0vrsO3_HpU')
+  const timeOfInit = performance.now()
 
   useEffect(() => {
     if (!player) return
-
-    socket.emit('request_video_id')
 
     socket.on('state_change', state => {
       switch (state) {
@@ -32,6 +32,10 @@ export const VideoPlayer = () => {
         socket.emit('time_change', time)
       } catch (e) {
         console.error(e)
+        new CheeseToast({
+          text: 'Unable to sync new user',
+          className: 'toast',
+        })
       }
     })
 
@@ -40,20 +44,24 @@ export const VideoPlayer = () => {
         player.seekTo(Number(time))
       } catch (e) {
         console.error(e)
-        alert('Unable to sync time')
+
+        // avoid trigger on mount
+        if (performance.now() - timeOfInit > 500) {
+          new CheeseToast({
+            text: 'Unable to sync time',
+            className: 'toast',
+          })
+        }
       }
     })
+  }, [player])
 
-    socket.on('request_time_update', () => {
-      let time
-      try {
-        time = player.getCurrentTime()
-        socket.emit('time_change', time)
-      } catch (e) {
-        console.error(e)
-      }
-    })
+  useEffect(() => {
+    if (!player) return
 
+    socket.emit('request_video_id')
+
+    // TODO: clean up listeners
     socket.on('request_video_id', () => {
       if (currentVideoId) socket.emit('update_video_id', currentVideoId)
     })
@@ -67,6 +75,10 @@ export const VideoPlayer = () => {
         setCurrentVideoId(id)
       } catch (e) {
         console.error(e)
+        new CheeseToast({
+          text: 'Unable to change video',
+          className: 'toast',
+        })
       }
     })
   }, [player, currentVideoId])
@@ -102,7 +114,11 @@ export const VideoPlayer = () => {
   const onChangeTime = d => {
     const newTime = player.getCurrentTime() + d
     socket.emit('time_change', newTime)
-    player.seekTo(newTime)
+    try {
+      player.seekTo(newTime)
+    } catch (e) {
+      // TODO
+    }
   }
 
   const onNewVideoSubmit = ytId => {
